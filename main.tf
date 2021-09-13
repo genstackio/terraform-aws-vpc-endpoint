@@ -1,14 +1,14 @@
 resource "aws_vpc_endpoint" "service" {
-  vpc_id              = var.vpc_id
-  service_name        = data.aws_vpc_endpoint_service.service.service_name
+  vpc_id       = var.vpc_id
+  service_name = data.aws_vpc_endpoint_service.service.service_name
   // common
-  vpc_endpoint_type   = local.type
+  vpc_endpoint_type = local.type
   // for Interface endpoints
   security_group_ids  = local.isInterface ? var.security_group_ids : null
   subnet_ids          = local.isInterface ? var.subnet_ids : null
   private_dns_enabled = local.isInterface ? var.private_dns_enabled : null
   // for Gateway endpoints
-  route_table_ids     = local.isInterface ? null : [var.route_table_id]
+  route_table_ids = local.isInterface ? null : [var.route_table_id]
 }
 
 // Gateway only
